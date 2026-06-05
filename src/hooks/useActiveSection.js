@@ -1,0 +1,32 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+export function useActiveSection(sectionIds) {
+  const [active, setActive] = useState(sectionIds[0] ?? "home");
+
+  useEffect(() => {
+    const observers = sectionIds.map((id) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActive(id);
+        },
+        { rootMargin: "-40% 0px -40% 0px", threshold: 0 }
+      );
+      observer.observe(el);
+      return observer;
+    });
+
+    return () => {
+      observers.forEach((obs, i) => {
+        const el = document.getElementById(sectionIds[i]);
+        if (obs && el) obs.unobserve(el);
+      });
+    };
+  }, [sectionIds]);
+
+  return active;
+}
