@@ -152,7 +152,7 @@ export function Contact() {
                   className="flex items-center gap-2 text-emerald-400 text-sm"
                 >
                   <CheckCircle className="w-4 h-4" />
-                  Message saved to database successfully!
+                  Your message has been sent successfully!
                 </motion.div>
               )}
               {status === "error" && (
@@ -163,7 +163,7 @@ export function Contact() {
                   className="flex items-center gap-2 text-rose-400 text-sm"
                 >
                   <AlertCircle className="w-4 h-4" />
-                  Could not save message. Is MongoDB running on localhost?
+                  Could not send message. Please try again.
                 </motion.div>
               )}
             </AnimatePresence>

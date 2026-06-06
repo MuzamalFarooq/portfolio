@@ -1,33 +1,41 @@
 import { NextResponse } from "next/server";
 import { saveContactMessage } from "@/lib/contactDb";
+import nodemailer from "nodemailer";
 
 async function sendEmailNotification({ name, email, message }) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL;
-  const from =
-    process.env.CONTACT_FROM_EMAIL || "Portfolio <onboarding@resend.dev>";
+  const user = process.env.GMAIL_USER;
+  const pass = process.env.GMAIL_APP_PASSWORD;
+  const to = process.env.CONTACT_TO_EMAIL || user;
 
-  if (!apiKey || !to) return;
+  if (!user || !pass) {
+    console.warn("Gmail notifications not sent: GMAIL_USER or GMAIL_APP_PASSWORD is not configured.");
+    return;
+  }
 
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: user,
+      pass: pass,
     },
-    body: JSON.stringify({
-      from,
-      to: [to],
-      reply_to: email,
-      subject: `Portfolio contact from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
-    }),
   });
 
-  if (!res.ok) {
-    const err = await res.json();
-    console.error("Resend error:", err);
-  }
+  const mailOptions = {
+    from: `"${name}" <${user}>`,
+    replyTo: email,
+    to: to,
+    subject: `Portfolio Contact: ${name}`,
+    text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+    html: `
+      <h3>New Message from Portfolio Contact Form</h3>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Message:</strong></p>
+      <p style="white-space: pre-wrap;">${message}</p>
+    `,
+  };
+
+  await transporter.sendMail(mailOptions);
 }
 
 export async function POST(request) {
