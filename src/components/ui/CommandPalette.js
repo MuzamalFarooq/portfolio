@@ -14,8 +14,24 @@ export function CommandPalette() {
       id: n.id,
       label: `Go to ${n.label}`,
       action: () => {
-        if (n.href) window.location.href = n.href;
-        else document.getElementById(n.id)?.scrollIntoView({ behavior: "smooth" });
+        if (n.href) {
+          window.location.href = n.href;
+        } else {
+          if (typeof window !== "undefined") {
+            if (window.location.pathname !== "/") {
+              window.location.href = `/#${n.id}`;
+            } else {
+              const element = document.getElementById(n.id);
+              if (element) {
+                if (window.lenis) {
+                  window.lenis.scrollTo(element);
+                } else {
+                  element.scrollIntoView({ behavior: "smooth" });
+                }
+              }
+            }
+          }
+        }
         setOpen(false);
       },
     })),

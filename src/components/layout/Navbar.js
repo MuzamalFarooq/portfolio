@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { siteConfig } from "@/data/site";
@@ -19,6 +20,8 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const active = useActiveSection(sectionIds);
   const { theme, toggleTheme } = useTheme();
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -27,7 +30,20 @@ export function Navbar() {
   }, []);
 
   const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    if (pathname !== "/") {
+      router.push(`/#${id}`);
+      setMobileOpen(false);
+      return;
+    }
+
+    const element = document.getElementById(id);
+    if (element) {
+      if (typeof window !== "undefined" && window.lenis) {
+        window.lenis.scrollTo(element);
+      } else {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
     setMobileOpen(false);
   };
 

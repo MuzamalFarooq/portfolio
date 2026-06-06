@@ -20,6 +20,10 @@ export function SmoothScroll({ children }) {
       smoothWheel: true,
     });
 
+    if (typeof window !== "undefined") {
+      window.lenis = lenis;
+    }
+
     lenis.on("scroll", ScrollTrigger.update);
 
     function raf(time) {
@@ -30,6 +34,9 @@ export function SmoothScroll({ children }) {
 
     return () => {
       lenis.destroy();
+      if (typeof window !== "undefined") {
+        window.lenis = null;
+      }
     };
   }, [reduced]);
 
