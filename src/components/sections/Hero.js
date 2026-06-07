@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
-import { Github, Linkedin, Twitter, Download, Mail } from "lucide-react";
+import { Github, Linkedin, Twitter, Download, Mail, Instagram } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { ThreeScene } from "@/components/effects/ThreeScene";
@@ -17,7 +17,7 @@ const ParticleBackground = dynamic(
   { ssr: false }
 );
 
-const socialIcons = { github: Github, linkedin: Linkedin, twitter: Twitter, dev: Github };
+const socialIcons = { github: Github, linkedin: Linkedin, twitter: Twitter, dev: Github, instagram: Instagram };
 
 export function Hero() {
   const [skillIndex, setSkillIndex] = useState(0);

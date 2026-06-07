@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
 const iconMap = {
@@ -10,6 +10,7 @@ const iconMap = {
   linkedin: Linkedin,
   twitter: Twitter,
   dev: Github,
+  instagram: Instagram,
 };
 
 export function Footer() {
