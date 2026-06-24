@@ -4,11 +4,11 @@ export const projects = [
     title: "Pizza Ordering System",
     description:
       "Full-stack food ordering platform with cart management, Stripe payments, admin dashboard, and real-time order tracking.",
-    technologies: ["React", "Node.js", "MongoDB", "Express", "Stripe"],
+    technologies: ["Next.js", "Node.js", "MongoDB", "Express", "Stripe"],
     image:
       "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80",
-    github: "https://github.com",
-    live: "https://example.com",
+    github: "https://github.com/MuzamalFarooq/pizza-logist",
+    live: "https://pizza-logist.vercel.app/",
     category: "fullstack",
   },
   {
@@ -36,12 +36,12 @@ export const projects = [
   },
   {
     id: "true-love-chat",
-    title: "True Love Chat Platform",
+    title: "Soul-Bridge Dating App",
     description:
       "Social dating platform with matching algorithms, video calls, and end-to-end encrypted messaging.",
     technologies: ["Next.js", "MongoDB", "WebRTC", "Framer Motion"],
     image: "/projects/true-love-chat.jpg",
-    github: "https://github.com",
+    github: "https://github.com/MuzamalFarooq/Soul-Bridge-Dating-App",
     live: "https://example.com",
     category: "realtime",
   },

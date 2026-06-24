@@ -5,7 +5,7 @@ export const siteConfig = {
   email: "muzamalfarooq111@gmail.com",
   phone: "+92 306 7774327",
   location: "Lahore, Pakistan",
-  resumeUrl: "/Resume_Muzamal_Farooq.pdf",
+  resumeUrl: "/Resume Muzamal Farooq.pdf",
   rotatingSkills: [
     "Next.js",
     "React.js",
@@ -54,7 +54,7 @@ export const siteConfig = {
     {
       year: "2022",
       title: "ICS — Intermediate in Computer Science",
-      institution: "Government Associate College Marote",
+      institution: "Government Associate College Marot",
       description: "Computer Science, Mathematics & Physics",
     },
     // {
