@@ -9,7 +9,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { cn } from "@/lib/utils";
 
 const VISIBLE_LG = 4; // cards visible on large screens
-const VISIBLE_SM = 2; // cards visible on small screens
+const VISIBLE_SM = 1; // cards visible on small screens
 
 export function Projects() {
   const [filter, setFilter] = useState("all");
@@ -84,7 +84,9 @@ export function Projects() {
             disabled={index === 0}
             aria-label="Previous projects"
             className={cn(
-              "absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 z-20 p-3 rounded-full glass border transition-all duration-300",
+              "absolute left-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full glass border transition-all duration-300",
+              "md:-translate-x-5",
+              "translate-x-1",
               index === 0
                 ? "border-white/5 opacity-30 cursor-not-allowed"
                 : "border-white/10 hover:border-accent/50 hover:shadow-glow-sm"
@@ -114,7 +116,7 @@ export function Projects() {
                         alt={project.title}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-110 group-hover:blur-[2px]"
-                        sizes="(max-width: 768px) 50vw, 25vw"
+                        sizes="(max-width: 768px) 100vw, 25vw"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface)] via-transparent to-transparent opacity-80" />
 
@@ -177,7 +179,9 @@ export function Projects() {
             disabled={index >= maxIndex}
             aria-label="Next projects"
             className={cn(
-              "absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 z-20 p-3 rounded-full glass border transition-all duration-300",
+              "absolute right-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full glass border transition-all duration-300",
+              "md:translate-x-5",
+              "-translate-x-1",
               index >= maxIndex
                 ? "border-white/5 opacity-30 cursor-not-allowed"
                 : "border-white/10 hover:border-accent/50 hover:shadow-glow-sm"

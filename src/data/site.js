@@ -5,7 +5,7 @@ export const siteConfig = {
   email: "muzamalfarooq111@gmail.com",
   phone: "+92 306 7774327",
   location: "Lahore, Pakistan",
-  resumeUrl: "/Resume Muzamal Farooq.pdf",
+  resumeUrl: "/Resume Muzamal Farooq .pdf",
   rotatingSkills: [
     "Next.js",
     "React.js",
