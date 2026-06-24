@@ -45,10 +45,23 @@ export const projects = [
     live: "https://example.com",
     category: "realtime",
   },
+  {
+    id: "quran-academy",
+    title: "Quran Academy",
+    description:
+      "Islamic e-learning platform featuring Quran recitation lessons, Tajweed courses, progress tracking, and a student-teacher portal with live session scheduling.",
+    technologies: ["Next.js", "MongoDB", "Tailwind", "Node.js", "Stripe"],
+    image:
+      "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=800&q=80",
+    github: "https://github.com/MuzamalFarooq/Quran-Academy",
+    live: "https://quran-academy-inky.vercel.app/",
+    category: "education",
+  },
 ];
 
 export const projectFilters = [
   { id: "all", label: "All" },
   { id: "fullstack", label: "Full Stack" },
   { id: "realtime", label: "Real-time" },
+  { id: "education", label: "Education" },
 ];
