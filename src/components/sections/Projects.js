@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ExternalLink, Github, ChevronLeft, ChevronRight } from "lucide-react";
@@ -16,6 +16,9 @@ export function Projects() {
   const [index, setIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(VISIBLE_LG);
   const trackRef = useRef(null);
+  const touchStartX = useRef(null);
+  const touchCurrentX = useRef(null);
+  const isDragging = useRef(false);
 
   const filtered =
     filter === "all" ? projects : projects.filter((p) => p.category === filter);
@@ -45,6 +48,32 @@ export function Projects() {
   function next() {
     setIndex((i) => Math.min(maxIndex, i + 1));
   }
+
+  // Touch handlers
+  const handleTouchStart = useCallback((e) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchCurrentX.current = e.touches[0].clientX;
+    isDragging.current = true;
+  }, []);
+
+  const handleTouchMove = useCallback((e) => {
+    if (!isDragging.current) return;
+    touchCurrentX.current = e.touches[0].clientX;
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    if (!isDragging.current || touchStartX.current === null) return;
+    const delta = touchStartX.current - touchCurrentX.current;
+    const SWIPE_THRESHOLD = 40;
+    if (delta > SWIPE_THRESHOLD) {
+      next();
+    } else if (delta < -SWIPE_THRESHOLD) {
+      prev();
+    }
+    isDragging.current = false;
+    touchStartX.current = null;
+    touchCurrentX.current = null;
+  }, [maxIndex, index]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const cardWidthPercent = 100 / visibleCount;
   const translateX = -(index * cardWidthPercent);
@@ -96,7 +125,13 @@ export function Projects() {
           </button>
 
           {/* Track Viewport */}
-          <div className="overflow-hidden rounded-xl">
+          <div
+            className="overflow-hidden rounded-xl"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            style={{ touchAction: "pan-y", userSelect: "none" }}
+          >
             <div
               ref={trackRef}
               className="flex transition-transform duration-500 ease-in-out"

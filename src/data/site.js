@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Muzamal Farooq",
-  role: "MERN Stack Developer | Software Engineer",
+  role: "Software Engineer || Full Stack Developer ",
   tagline: "Building immersive digital experiences with modern web technologies.",
   email: "muzamalfarooq111@gmail.com",
   phone: "+92 306 7774327",

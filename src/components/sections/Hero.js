@@ -59,9 +59,37 @@ export function Hero() {
           Welcome to my portfolio
         </motion.p>
 
-        <h1 className="hero-line font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-4">
-          <span className="block">{siteConfig.name}</span>
-        </h1>
+        <motion.h1
+          className="hero-line font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-4"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.045, delayChildren: 1.0 } },
+          }}
+          aria-label={siteConfig.name}
+        >
+          {siteConfig.name.split("").map((char, i) => (
+            <motion.span
+              key={i}
+              className={`inline-block${char === " " ? " w-[0.35em]" : ""}`}
+              variants={{
+                hidden: { opacity: 0, y: 60, rotate: -8, filter: "blur(8px)" },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  rotate: 0,
+                  filter: "blur(0px)",
+                  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+                },
+              }}
+              whileHover={{ y: -6, color: "var(--accent)", transition: { duration: 0.15 } }}
+              style={{ cursor: "default" }}
+            >
+              {char === " " ? "\u00A0" : char}
+            </motion.span>
+          ))}
+        </motion.h1>
 
         <p className="hero-line text-lg md:text-2xl text-[var(--text-secondary)] mb-6">
           {siteConfig.role}
