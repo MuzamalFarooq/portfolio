@@ -108,7 +108,7 @@ export function Projects() {
         {/* Slider Wrapper */}
         <div className="relative">
           {/* Prev Arrow */}
-          <button
+          {/* <button
             onClick={prev}
             disabled={index === 0}
             aria-label="Previous projects"
@@ -122,7 +122,7 @@ export function Projects() {
             )}
           >
             <ChevronLeft className="w-5 h-5" />
-          </button>
+          </button> */}
 
           {/* Track Viewport */}
           <div
@@ -209,7 +209,7 @@ export function Projects() {
           </div>
 
           {/* Next Arrow */}
-          <button
+          {/* <button
             onClick={next}
             disabled={index >= maxIndex}
             aria-label="Next projects"
@@ -223,7 +223,7 @@ export function Projects() {
             )}
           >
             <ChevronRight className="w-5 h-5" />
-          </button>
+          </button> */}
         </div>
 
         {/* Dot Indicators */}
